@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Погода для работы на улице — Санкт-Петербург</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <p class="brand">Погодный дашборд</p>
+      <p class="place">Санкт-Петербург</p>
+      <nav aria-label="Разделы дашборда">
+        <ul>
+          <li><a href="#metrics">Показатели</a></li>
+          <li><a href="#status">Статус данных</a></li>
+          <li><a href="#explain">Пояснения</a></li>
+          <li><a href="#warnings">Официальные предупреждения</a></li>
+          <li><a href="#sources">Источники и ограничения</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>Погодные факторы для работы на улице</h1>
+          <p class="subtitle">Санкт-Петербург · обновлено: <span id="top-updated">ещё не загружено</span></p>
+        </div>
+        <button type="button" id="refresh-btn" class="btn">Обновить</button>
+      </header>
+
+      <p class="notice" role="note">
+        <strong>Модельные данные, а не измерения.</strong>
+        Это расчёт погодной модели Open-Meteo. Он <strong>не является официальным оповещением о ЧС</strong>.
+        Официальные предупреждения — в блоке <a href="#warnings">«Официальные предупреждения»</a>.
+      </p>
+
+      <section id="metrics" class="metrics" aria-labelledby="metrics-title">
+        <h2 id="metrics-title" class="visually-hidden">Показатели</h2>
+
+        <article class="card" aria-labelledby="t-title">
+          <h3 id="t-title" class="card-title">Температура воздуха</h3>
+          <p class="card-value"><span id="temp-value" class="value">—</span> <span id="temp-unit" class="unit"></span></p>
+          <p class="card-hint">на высоте 2 м над землёй</p>
+        </article>
+
+        <article class="card" aria-labelledby="w-title">
+          <h3 id="w-title" class="card-title">Скорость ветра</h3>
+          <p class="card-value"><span id="wind-value" class="value">—</span> <span id="wind-unit" class="unit"></span></p>
+          <p class="card-hint">на высоте 10 м, без порывов</p>
+        </article>
+
+        <article class="card" aria-labelledby="p-title">
+          <h3 id="p-title" class="card-title">Осадки</h3>
+          <p class="card-value"><span id="precip-value" class="value">—</span> <span id="precip-unit" class="unit"></span></p>
+          <p class="card-hint">сумма за предыдущие <span id="precip-interval">15</span> мин</p>
+        </article>
+      </section>
+
+      <div class="widgets">
+        <section id="status" class="widget" aria-labelledby="status-title">
+          <h2 id="status-title">Статус данных</h2>
+          <p id="status-message" class="status" role="status" aria-live="polite">Загрузка…</p>
+          <button type="button" id="retry-btn" class="btn btn-secondary" hidden>Повторить запрос</button>
+          <dl class="facts">
+            <dt>Данные относятся к</dt>
+            <dd id="data-time">—</dd>
+            <dt>Последняя успешная загрузка</dt>
+            <dd id="loaded-time">—</dd>
+            <dt>Точка модели</dt>
+            <dd id="grid-point">—</dd>
+          </dl>
+          <p class="small">Время указано по московскому времени (UTC+3) — в Санкт-Петербурге действует оно же.</p>
+        </section>
+
+        <section id="explain" class="widget" aria-labelledby="explain-title">
+          <h2 id="explain-title">Пояснения к показателям</h2>
+          <dl class="facts">
+            <dt>Температура (°C)</dt>
+            <dd>Температура воздуха на высоте 2 м. Не учитывает ощущаемую температуру и охлаждение ветром.</dd>
+            <dt>Ветер (м/с)</dt>
+            <dd>Средняя скорость ветра на высоте 10 м. Порывы могут быть заметно сильнее и здесь не показаны.</dd>
+            <dt>Осадки (мм)</dt>
+            <dd>Сумма дождя, ливней и снега (в пересчёте на воду) за предыдущий 15-минутный интервал модели. 0 мм — модель не рассчитала осадков за этот интервал.</dd>
+          </dl>
+          <p class="small">Значения не оцениваются как «опасные» или «безопасные»: дашборд не вводит собственных порогов.</p>
+        </section>
+
+        <section id="warnings" class="widget" aria-labelledby="warnings-title">
+          <h2 id="warnings-title">Официальные предупреждения</h2>
+          <p>Решения при угрозе непогоды принимайте по официальным источникам:</p>
+          <ul class="links">
+            <li>
+              <a href="https://meteoinfo.ru/hazardsbull" target="_blank" rel="noopener noreferrer">Гидрометцентр России — бюллетень опасных и неблагоприятных гидрометеорологических явлений</a>
+            </li>
+            <li>
+              <a href="https://78.mchs.gov.ru/deyatelnost/press-centr/operativnaya-informaciya" target="_blank" rel="noopener noreferrer">Главное управление МЧС России по г. Санкт-Петербургу — оперативная информация</a>
+            </li>
+          </ul>
+          <p class="small">Ссылки проверены 25.10.2026.</p>
+        </section>
+
+        <section id="sources" class="widget" aria-labelledby="sources-title">
+          <h2 id="sources-title">Источники и ограничения</h2>
+          <dl class="facts">
+            <dt>Владелец данных</dt>
+            <dd>Open-Meteo (open-meteo.com), лицензия данных CC BY 4.0</dd>
+            <dt>Документация API</dt>
+            <dd><a href="https://open-meteo.com/en/docs" target="_blank" rel="noopener noreferrer">Open-Meteo Weather Forecast API</a></dd>
+            <dt>Дата проверки</dt>
+            <dd>25.10.2026</dd>
+          </dl>
+          <ul class="small-list">
+            <li>Это модельный прогноз для ближайшего узла сетки модели, а не показания метеостанции. В отдельном районе города погода может отличаться.</li>
+            <li>Текущие значения рассчитываются с шагом 15 минут и обновляются с задержкой.</li>
+            <li>Бесплатный тариф: только некоммерческое использование, до 10 000 запросов в сутки, 5 000 в час, 600 в минуту (<a href="https://open-meteo.com/en/terms" target="_blank" rel="noopener noreferrer">условия</a>).</li>
+            <li>Запрос идёт прямо из браузера, без ключа; Open-Meteo разрешает CORS.</li>
+          </ul>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

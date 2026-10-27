@@ -1,0 +1,333 @@
+:root {
+  --bg: #f3f5f8;
+  --panel: #ffffff;
+  --sidebar: #1f2a37;
+  --sidebar-text: #e6ebf1;
+  --text: #1c2430;
+  --muted: #5a6575;
+  --border: #d7dde5;
+  --accent: #1d5fbf;
+  --error-bg: #fdecec;
+  --error-text: #8a1c1c;
+  --ok-bg: #e9f5ec;
+  --ok-text: #1f5e2e;
+  --notice-bg: #fff6dd;
+  --notice-border: #e3c56b;
+  --focus: #ff9f1a;
+  --gap: 16px;
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text);
+  background: var(--bg);
+}
+
+a {
+  color: var(--accent);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 100vh;
+}
+
+/* Боковая панель */
+.sidebar {
+  background: var(--sidebar);
+  color: var(--sidebar-text);
+  padding: 20px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.brand {
+  margin: 0;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.place {
+  margin: 4px 0 20px;
+  color: #aab6c5;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--sidebar-text);
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Основная область */
+.main {
+  padding: 20px 24px 32px;
+  max-width: 1200px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap);
+  margin-bottom: 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.subtitle {
+  margin: 2px 0 0;
+  color: var(--muted);
+}
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 9px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: #174d9c;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.btn-secondary:hover {
+  background: #eef3fb;
+}
+
+.notice {
+  margin: 0 0 var(--gap);
+  padding: 10px 14px;
+  background: var(--notice-bg);
+  border: 1px solid var(--notice-border);
+  border-radius: var(--radius);
+}
+
+/* Карточки показателей */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+.card,
+.widget {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.card-value {
+  margin: 6px 0 4px;
+}
+
+.value {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.value.is-missing {
+  font-size: 22px;
+  color: var(--muted);
+}
+
+.unit {
+  font-size: 20px;
+  color: var(--muted);
+}
+
+.card-hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Сетка виджетов */
+.widgets {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap);
+}
+
+.widget h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.status {
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-weight: 600;
+}
+
+.status.is-ok {
+  background: var(--ok-bg);
+  color: var(--ok-text);
+  border-color: #a9d3b4;
+}
+
+.status.is-error {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border-color: #e6a9a9;
+}
+
+.facts {
+  margin: 0;
+}
+
+.facts dt {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.facts dd {
+  margin: 0 0 10px;
+}
+
+.links,
+.small-list {
+  margin: 0 0 8px;
+  padding-left: 20px;
+}
+
+.links li,
+.small-list li {
+  margin-bottom: 6px;
+}
+
+.small,
+.small-list {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.small {
+  margin: 8px 0 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Планшет */
+@media (max-width: 960px) {
+  .widgets {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Телефон */
+@media (max-width: 720px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+    padding: 12px 16px;
+  }
+
+  .place {
+    margin-bottom: 8px;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .sidebar a {
+    padding: 4px 8px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .main {
+    padding: 16px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  h1 {
+    font-size: 19px;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .value {
+    font-size: 36px;
+  }
+}
